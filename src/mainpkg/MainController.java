@@ -111,12 +111,33 @@ public class MainController {
     public void updateList() {
         ObservableList<Point> items = FXCollections.observableArrayList();
         ArrayList<Point> points = PointSetContainer.getInstance().getPointSet().getPoints();
-
         items.addAll(points);
         pointsList.setItems(items);
     }
 
+    private void clearMarks() {
+        ArrayList<Point> points = PointSetContainer.getInstance().getPointSet().getPoints();
+        for (Point p : points) {
+            p.setInTriangle(false);
+        }
+    }
+
+    private void markResultPoints(Triangle triangle) {
+        PointSet pointSet = PointSetContainer.getInstance().getPointSet();
+
+        int indexP1 = pointSet.indexOf(triangle.getP1());
+        int indexP2 = pointSet.indexOf(triangle.getP2());
+        int indexP3 = pointSet.indexOf(triangle.getP3());
+
+        ArrayList<Point> points = PointSetContainer.getInstance().getPointSet().getPoints();
+        points.get(indexP1).setInTriangle(true);
+        points.get(indexP2).setInTriangle(true);
+        points.get(indexP3).setInTriangle(true);
+        updateList();
+    }
+
     private boolean calculateResult() {
+        clearMarks();
         if (PointSetContainer.getInstance().getPointSet().size() < 3) {
             showAlertWithError("Для построения треугольника требуется хотя бы 3 точки!");
         } else {
@@ -130,6 +151,7 @@ public class MainController {
                 } else {
                     DecimalFormat df = new DecimalFormat("#0.000");
                     resultLabel.setText(defaultText + " " + df.format(heightLen));
+                    markResultPoints(triangle);
                     return true;
                 }
             }

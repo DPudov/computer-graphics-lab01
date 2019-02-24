@@ -5,12 +5,14 @@ import java.text.DecimalFormat;
 public class Point {
     private double worldX;
     private double worldY;
+    private boolean inTriangle;
     private static final double PADDING_SCALE_LEFT_BOTTOM = 0.8;
     private static final double PADDING_SCALE_RIGHT_TOP = 0.1;
 
     public Point(double worldX, double worldY) {
         this.worldX = worldX;
         this.worldY = worldY;
+        this.inTriangle = false;
     }
 
     public double getWorldX() {
@@ -49,5 +51,21 @@ public class Point {
 
     public boolean isEqualTo(Point other) {
         return worldX == other.getWorldX() && worldY == other.getWorldY();
+    }
+
+    public void setInTriangle(boolean inTriangle) {
+        this.inTriangle = inTriangle;
+    }
+
+    public boolean isInTriangle() {
+        return inTriangle;
+    }
+
+    public void setWorldX(double worldX) {
+        this.worldX = worldX;
+    }
+
+    public void setWorldY(double worldY) {
+        this.worldY = worldY;
     }
 }

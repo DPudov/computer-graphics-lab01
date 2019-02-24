@@ -5,16 +5,15 @@ import javafx.scene.canvas.Canvas;
 public class ResizableCanvas extends Canvas {
     public ResizableCanvas() {
         // Redraw canvas when size changes.
-        widthProperty().addListener(evt -> draw());
-        heightProperty().addListener(evt -> draw());
+//        widthProperty().addListener(evt -> draw());
+//        heightProperty().addListener(evt -> draw());
     }
 
-    private void draw() {
-        double width = getWidth();
-        double height = getHeight();
-        // TODO: resize with redraw
-        System.out.println("Mock for resize");
-    }
+//    private void draw() {
+//        double width = getWidth();
+//        double height = getHeight();
+//
+//    }
 
     @Override
     public boolean isResizable() {

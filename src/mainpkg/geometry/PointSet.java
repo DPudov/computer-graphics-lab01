@@ -124,4 +124,14 @@ public class PointSet {
         updateMinMax();
         return maxY;
     }
+
+    public int indexOf(Point point) {
+        int res = 0;
+        for (int i = 0; i < points.size(); i++) {
+            if (point.isEqualTo(points.get(i))) {
+                return i;
+            }
+        }
+        return res;
+    }
 }

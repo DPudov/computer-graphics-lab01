@@ -37,10 +37,6 @@ public class CanvasController {
         });
     }
 
-//    public void setPointSet(PointSet pointSet) {
-//        this.pointSet = pointSet;
-//    }
-
     private void drawTriangle(Triangle triangle) {
         Point p1 = triangle.getP1();
         Point p2 = triangle.getP2();

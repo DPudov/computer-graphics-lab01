@@ -20,3 +20,10 @@
     -fx-max-width: 100px;
     -fx-padding: 5px;
 }
+
+.point-list-edit {
+    -fx-padding: 5px;
+    -fx-font-size: 13pt;
+    -fx-background-color: peru;
+    -fx-text-fill: white;
+}
