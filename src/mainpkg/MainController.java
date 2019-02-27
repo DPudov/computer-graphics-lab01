@@ -44,6 +44,9 @@ public class MainController {
     Button drawButton;
 
     @FXML
+    Button clearAllButton;
+
+    @FXML
     public void initialize() {
         defaultText = resultLabel.getText();
 
@@ -57,21 +60,31 @@ public class MainController {
         TextFormatter formatter2 = new TextFormatter(filter);
         inputY.setTextFormatter(formatter2);
 
+        clearAllButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (EventHandler<Event>) t-> {
+            PointSetContainer.getInstance().getPointSet().clearAll();
+            updateList();
+        });
+
         addPointButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (EventHandler<Event>) t -> {
             String xText = inputX.getText();
             String yText = inputY.getText();
             if (xText == null || xText.isEmpty() || yText == null || yText.isEmpty()) {
                 showAlertWithError("У точки не определены координаты!");
             } else {
-                double xValue = Double.parseDouble(xText);
-                double yValue = Double.parseDouble(yText);
-                Point newPoint = new Point(xValue, yValue);
-                if (!PointSetContainer.getInstance().getPointSet().contains(newPoint)) {
-                    PointSetContainer.getInstance().getPointSet().add(newPoint);
-                    updateList();
-                } else {
-                    showAlertWithError("Такая точка уже есть!");
+                try {
+                    double xValue = Double.parseDouble(xText);
+                    double yValue = Double.parseDouble(yText);
+                    Point newPoint = new Point(xValue, yValue);
+                    if (!PointSetContainer.getInstance().getPointSet().contains(newPoint)) {
+                        PointSetContainer.getInstance().getPointSet().add(newPoint);
+                        updateList();
+                    } else {
+                        showAlertWithError("Такая точка уже есть!");
+                    }
+                } catch (Exception e) {
+                    showAlertWithError("Ошибка ввода!");
                 }
+
             }
 
             inputX.clear();
@@ -89,13 +102,15 @@ public class MainController {
                     Stage canvasStage = new Stage();
                     canvasStage.setTitle("А здесь будет построена визуализация полученного решения...");
                     canvasStage.setScene(new Scene(root, 600, 600));
+                    canvasStage.setResizable(false);
+                    canvasStage.sizeToScene();
                     canvasStage.show();
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+
     }
 
     private void showAlertWithError(String error) {

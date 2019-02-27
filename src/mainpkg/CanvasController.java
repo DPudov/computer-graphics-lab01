@@ -24,6 +24,7 @@ public class CanvasController {
             canvas.widthProperty().bind(pane.widthProperty());
             canvas.heightProperty().bind(pane.heightProperty());
             PointSet set = PointSetContainer.getInstance().getPointSet();
+            drawGrid();
             if (set != null) {
                 Triangle triangle = set.findMagicTriangle();
                 drawTriangle(triangle);
@@ -56,10 +57,12 @@ public class CanvasController {
         double width = canvas.getWidth();
         double height = canvas.getHeight();
 
-        double x1 = p1.getScreenX(minX, maxX, width);
-        double y1 = p1.getScreenY(minY, maxY, height);
-        double x2 = p2.getScreenX(minX, maxX, width);
-        double y2 = p2.getScreenY(minY, maxY, height);
+        Point screenPoint1 = p1.getScreenPoint(minX, maxX, width, minY, maxY, height);
+        Point screenPoint2 = p2.getScreenPoint(minX, maxX, width, minY, maxY, height);
+        double x1 = screenPoint1.getWorldX();
+        double y1 = screenPoint1.getWorldY();
+        double x2 = screenPoint2.getWorldX();
+        double y2 = screenPoint2.getWorldY();;
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.RED);
@@ -72,8 +75,9 @@ public class CanvasController {
 
     private void drawPoint(Point point) {
         PointSet set = PointSetContainer.getInstance().getPointSet();
-        double x = point.getScreenX(set.getMinimumX(), set.getMaximumX(), canvas.getWidth());
-        double y = point.getScreenY(set.getMinimumY(), set.getMaximumY(), canvas.getHeight());
+        Point p = point.getScreenPoint(set.getMinimumX(), set.getMaximumX(), canvas.getWidth(), set.getMinimumY(), set.getMaximumY(), canvas.getHeight());
+        double x = p.getWorldX();
+        double y = p.getWorldY();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.BLACK);
@@ -81,5 +85,25 @@ public class CanvasController {
         gc.strokeLine(x, y, x, y);
         gc.setLineWidth(1);
         gc.strokeText(point.toString(), x, y);
+    }
+
+    private void drawGrid() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.DIMGREY);
+        gc.setLineWidth(0.5);
+        double step = 10;
+        double begin = 0;
+        double width = canvas.getWidth();
+        double height = canvas.getHeight();
+        while (begin < height) {
+            begin += step;
+            gc.strokeLine(0, begin, width, begin);
+        }
+
+        begin = 0;
+        while (begin < width) {
+            begin += step;
+            gc.strokeLine(begin, 0, begin, height);
+        }
     }
 }

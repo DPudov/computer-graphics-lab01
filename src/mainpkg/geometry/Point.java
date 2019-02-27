@@ -23,6 +23,30 @@ public class Point {
         return worldY;
     }
 
+    public Point getScreenPoint(double minX, double maxX, double screenWidth,
+                                double minY, double maxY, double screenHeight) {
+        if (screenWidth == 0 || (maxX - minX) == 0 || screenHeight == 0 || maxY - minY == 0) {
+            return new Point(300, 300);
+        }
+
+        double edX = screenWidth / Math.abs(maxX - minX);
+        double edY = screenHeight / Math.abs(maxY - minY);
+
+        double scaleX;
+        double scaleY;
+        if (edY > edX) {
+            scaleX = (worldX - minX) * edX;
+            scaleY = (maxY - worldY) * edX;
+        } else {
+            scaleX = (worldX - minX) * edY;
+            scaleY = (maxY - worldY) * edY;
+        }
+
+        double newX = scaleX * PADDING_SCALE_LEFT_BOTTOM + PADDING_SCALE_RIGHT_TOP * screenWidth;
+        double newY = scaleY * PADDING_SCALE_LEFT_BOTTOM + PADDING_SCALE_RIGHT_TOP * screenHeight;
+        return new Point(newX, newY);
+    }
+
     public int getScreenX(double minX, double maxX, double screenWidth) {
         if (screenWidth == 0 || (maxX - minX) == 0) {
             return 0;

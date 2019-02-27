@@ -45,6 +45,10 @@ public class PointSet {
         points.remove(index);
     }
 
+    public void clearAll() {
+        points.clear();
+    }
+
     public Triangle findMagicTriangle() {
         if (size() < 3) {
             return null;
@@ -77,12 +81,11 @@ public class PointSet {
     }
 
     private void updateMinMax() {
-        if (points.isEmpty()) {
-            minX = Double.MAX_VALUE;
-            maxX = Double.MIN_VALUE;
-            minY = Double.MAX_VALUE;
-            maxY = Double.MIN_VALUE;
-        }
+        minX = Double.MAX_VALUE;
+        maxX = Double.MIN_VALUE;
+        minY = Double.MAX_VALUE;
+        maxY = Double.MIN_VALUE;
+
 
         for (Point p : points) {
             double curX = p.getWorldX();
