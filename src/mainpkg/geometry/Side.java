@@ -1,9 +1,8 @@
 package mainpkg.geometry;
 
-import mainpkg.geometry.Point;
-
-public class Side {
-    Point p1, p2;
+class Side {
+    private final Point p1;
+    private final Point p2;
 
     public Side(Point p1, Point p2) {
         this.p1 = p1;

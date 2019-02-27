@@ -1,8 +1,8 @@
 package mainpkg.geometry;
 
 public class PointSetContainer {
-    private PointSet pointSet;
-    private static PointSetContainer ourInstance = new PointSetContainer();
+    private final PointSet pointSet;
+    private static final PointSetContainer ourInstance = new PointSetContainer();
 
     public static PointSetContainer getInstance() {
         return ourInstance;

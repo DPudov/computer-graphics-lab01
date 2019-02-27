@@ -1,12 +1,11 @@
 package mainpkg.geometry;
 
-import mainpkg.DoubleFilter;
 import mainpkg.MainController;
 
 import java.util.ArrayList;
 
 public class PointSet {
-    private ArrayList<Point> points;
+    private final ArrayList<Point> points;
     private double minX;
     private double maxX;
     private double minY;
@@ -26,9 +25,6 @@ public class PointSet {
     }
 
     public Point get(int index) {
-        if (points == null) {
-            return null;
-        }
 
         return points.get(index);
     }
@@ -43,6 +39,10 @@ public class PointSet {
 
     public void remove(int index) {
         points.remove(index);
+    }
+
+    public void clearAll() {
+        points.clear();
     }
 
     public Triangle findMagicTriangle() {
@@ -77,12 +77,11 @@ public class PointSet {
     }
 
     private void updateMinMax() {
-        if (points.isEmpty()) {
-            minX = Double.MAX_VALUE;
-            maxX = Double.MIN_VALUE;
-            minY = Double.MAX_VALUE;
-            maxY = Double.MIN_VALUE;
-        }
+        minX = Double.MAX_VALUE;
+        maxX = Double.MIN_VALUE;
+        minY = Double.MAX_VALUE;
+        maxY = Double.MIN_VALUE;
+
 
         for (Point p : points) {
             double curX = p.getWorldX();

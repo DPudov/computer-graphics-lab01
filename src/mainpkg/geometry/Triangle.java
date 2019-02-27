@@ -1,15 +1,15 @@
 package mainpkg.geometry;
 
 public class Triangle {
-    private Point p1;
-    private Point p2;
-    private Point p3;
-    private double xA;
-    private double xB;
-    private double xC;
-    private double yA;
-    private double yB;
-    private double yC;
+    private final Point p1;
+    private final Point p2;
+    private final Point p3;
+    private final double xA;
+    private final double xB;
+    private final double xC;
+    private final double yA;
+    private final double yB;
+    private final double yC;
 
     public Point getP1() {
         return p1;

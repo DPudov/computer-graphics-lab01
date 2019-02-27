@@ -18,7 +18,7 @@ public class PointCell extends ListCell<Point> {
     private static final String STYLE_INPUT_CLASS = "point-list-input";
     private static final String STYLE_EDIT_CLASS = "point-list-edit";
 
-    private MainController controller;
+    private final MainController controller;
 
     public PointCell(MainController controller) {
         this.controller = controller;

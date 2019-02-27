@@ -8,8 +8,6 @@
             xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane fx:id="pane" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <children>
-            <ResizableCanvas fx:id="canvas" height="600.0" width="600.0"/>
-        </children>
+        <ResizableCanvas fx:id="canvas" height="600.0" width="600.0"/>
     </StackPane>
 </AnchorPane>

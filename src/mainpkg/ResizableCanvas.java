@@ -2,7 +2,7 @@ package mainpkg;
 
 import javafx.scene.canvas.Canvas;
 
-public class ResizableCanvas extends Canvas {
+class ResizableCanvas extends Canvas {
     public ResizableCanvas() {
         // Redraw canvas when size changes.
 //        widthProperty().addListener(evt -> draw());
