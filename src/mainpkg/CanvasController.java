@@ -62,7 +62,7 @@ public class CanvasController {
         double x1 = screenPoint1.getWorldX();
         double y1 = screenPoint1.getWorldY();
         double x2 = screenPoint2.getWorldX();
-        double y2 = screenPoint2.getWorldY();
+        double y2 = screenPoint2.getWorldY();;
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.RED);
